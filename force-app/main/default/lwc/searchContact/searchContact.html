@@ -1,0 +1,135 @@
+<template>
+   <template if:false={flag}>
+    <lightning-card>
+        <div class="slds-align_absolute-center" >
+            <lightning-button 
+            variant="brand" 
+            label="Search" 
+            title="Search" 
+            onclick={handleClick}></lightning-button>
+        </div>
+
+    </lightning-card>
+   </template>
+    <template if:true={flag}>
+        <lightning-card>
+            <div class="slds-text-heading_large">
+                Contact Search
+            </div>
+        </lightning-card>
+            
+        <div >
+            <lightning-card>
+                <div class="slds-grid slds-gutters slds-p-around_small">
+                    <div class="slds-col slds-size_1-of-4">
+                        <p>Contact Name</p>
+                    </div>
+                    
+                    <div class="slds-col slds-size_2-of-4">
+                       
+                        <lightning-input
+                    name="Enter Contact Name"
+                    type="search"
+                    variant="label-hidden"
+                    onchange={handleSearch}> </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-button 
+                        variant="brand" 
+                         label="Search" 
+                         title="Search" 
+                         onclick={handleSearch}></lightning-button>
+                    </div>
+                </div>
+                <br>
+            <div class="slds-grid slds-gutters">
+
+                <div class="slds-col slds-size_2-of-3">
+                    <lightning-datatable
+                    key-field="Id"
+                    data = {data}
+                    columns={columns}
+                    hide-checkbox-column="true"
+                    onrowaction={handleRowAction}
+                    enable-infinite-loading
+                     onloadmore={loadMoreData}
+                    >
+                    </lightning-datatable>
+                </div>
+                <div class="slds-col slds-size_1-of-3">
+                    <template if:true={flagbutton}>
+                        <lightning-button variant="brand" 
+                        label="Contact" 
+                        title="Contact" 
+                        onclick={handleUrl}></lightning-button>
+                    </template>
+                        <br>
+                        {name} <br>
+                        {phone} <br>
+                        {email} 
+             
+                       
+                    
+                </div>
+
+            </div>
+                <br>
+                <div class="slds-clearfix slds-p-around_small">
+                    <div class="slds-float_left">
+                        <lightning-button 
+                        variant="brand" 
+                        label="Close" 
+                        title="Close" 
+                        onclick={handleClick}></lightning-button>
+                    </div>
+                    <div class="slds-float_right">
+                        <lightning-button 
+                    variant="brand" 
+                    label="Create" 
+                    title="Create" 
+                    onclick={handleClick}></lightning-button>
+                    </div>
+                    
+                </div>
+    
+            </lightning-card>
+
+        </div>
+   
+
+
+    </template>
+
+
+    <template if:true={flagContact}>
+        <lightning-card>
+
+                <lightning-input label="First Name" name="First Namee" required="required" type="text" value={contactRecord.FirstName} onchange={handleFirstName}></lightning-input>
+                <lightning-input label="Last Name" name="Last Name" required="required" type="text" value={contactRecord.LastName} onchange={handleLastName}></lightning-input>
+                <lightning-input label="Email" name="Email" required="required" type="text" value={contactRecord.Email} onchange={handleEmail}></lightning-input>
+                <lightning-input label="Phone" name="Phone" required="required" type="text" value={contactRecord.Phone} onchange={handlePhone}></lightning-input>
+                
+                <div class="slds-clearfix slds-p-around_small">
+                    <div class="slds-float_left">
+                    <lightning-button 
+                            variant="brand" 
+                             label="Create Contact" 
+                             title="Create Contact" 
+                            onclick={handleSave}></lightning-button>
+                    </div>
+                    <div class="slds-float_right">
+                        <lightning-button 
+                    variant="brand" 
+                    label="Close" 
+                    title="Close" 
+                    onclick={handleClose}></lightning-button>
+                    </div>
+                    
+                </div>
+
+                
+
+        </lightning-card>
+
+    </template>
+</template>
